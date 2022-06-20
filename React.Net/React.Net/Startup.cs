@@ -7,6 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
+using React.AspNet;
+using Microsoft.AspNetCore.Http;
 
 namespace React.Net
 {
@@ -23,6 +27,10 @@ namespace React.Net
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
+			services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName)
+				.AddChakraCore();
+			services.AddReact();
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +44,14 @@ namespace React.Net
 			{
 				app.UseExceptionHandler("/Home/Error");
 			}
+			app.UseReact(config =>
+			{
+				config
+					.SetReuseJavaScriptEngines(true)
+					.SetLoadBabel(false)
+					.SetLoadReact(false)
+					.SetReactAppBuildPath("~/dist");
+			});
 			app.UseStaticFiles();
 
 			app.UseRouting();

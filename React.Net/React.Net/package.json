@@ -1,0 +1,25 @@
+{
+  "name": "react.net",
+  "version": "1.0.0",
+  "description": "",
+  "main": "React/expose-components.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel-loader": "^8.2.5",
+    "webpack": "^5.73.0",
+    "webpack-assets-manifest": "^5.1.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-manifest-plugin": "^5.0.0"
+  },
+  "dependencies": {
+    "react": "16.14.0",
+    "react-dom": "16.14.0"
+  }
+}
